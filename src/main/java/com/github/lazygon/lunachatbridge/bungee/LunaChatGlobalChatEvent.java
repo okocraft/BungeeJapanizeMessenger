@@ -44,6 +44,10 @@ public class LunaChatGlobalChatEvent extends Event implements Cancellable {
         return worldName;
     }
 
+    public String getServerName() {
+        return serverName;
+    }
+
     public String getMessage() {
         return message;
     }
