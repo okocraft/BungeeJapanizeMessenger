@@ -26,6 +26,9 @@ public class PluginMessageListener implements Listener {
         ProxyServer.getInstance().getPluginManager().unregisterListener(INSTANCE);
     }
 
+    private PluginMessageListener() {
+    }
+
     @EventHandler
     public void onPluginMessageReceived(PluginMessageEvent event) {
         if (!event.getTag().equals("lc:tobungee")) {
