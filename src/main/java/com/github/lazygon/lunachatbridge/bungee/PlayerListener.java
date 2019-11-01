@@ -39,7 +39,6 @@ public class PlayerListener implements Listener {
             byteArrayOut.close();
         } catch (IOException e) {
             e.printStackTrace();
-            return;
         }
     }
 
@@ -58,7 +57,6 @@ public class PlayerListener implements Listener {
             byteArrayOut.close();
         } catch (IOException e) {
             e.printStackTrace();
-            return;
         }
     }
 }
