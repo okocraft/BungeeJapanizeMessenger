@@ -58,7 +58,6 @@ public class BungeeMain extends Plugin {
             byteOutStream.close();
         } catch (IOException e) {
             e.printStackTrace();
-            return;
         }
     }
 }
