@@ -7,8 +7,8 @@ public class LunaChatGlobalChatEvent extends Event implements Cancellable {
     private final String channelName, playerName, displayName, prefix, suffix, worldName, serverName, message;
     private boolean cancelled;
 
-    public LunaChatGlobalChatEvent(String channelName, String playerName, String displayName,
-                                   String prefix, String suffix, String worldName, String serverName, String message) {
+    LunaChatGlobalChatEvent(String channelName, String playerName, String displayName,
+                            String prefix, String suffix, String worldName, String serverName, String message) {
         this.channelName = channelName;
         this.playerName = playerName;
         this.displayName = displayName;
