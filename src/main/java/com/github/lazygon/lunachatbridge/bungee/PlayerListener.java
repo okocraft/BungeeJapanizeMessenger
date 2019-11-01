@@ -16,9 +16,6 @@ public class PlayerListener implements Listener {
     private static final BungeeMain PLUGIN = BungeeMain.getInstance();
     private static final PlayerListener INSTANCE = new PlayerListener();
 
-    private PlayerListener() {
-    }
-
     static void start() {
         ProxyServer.getInstance().getPluginManager().registerListener(PLUGIN, INSTANCE);
     }
