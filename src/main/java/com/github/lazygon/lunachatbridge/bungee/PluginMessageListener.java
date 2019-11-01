@@ -18,8 +18,6 @@ public class PluginMessageListener implements Listener {
     private static final BungeeMain PLUGIN = BungeeMain.getInstance();
     private static final PluginMessageListener INSTANCE = new PluginMessageListener();
 
-    private PluginMessageListener() {
-    }
 
     static void start() {
         ProxyServer.getInstance().getPluginManager().registerListener(PLUGIN, INSTANCE);
