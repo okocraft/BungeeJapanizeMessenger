@@ -68,7 +68,7 @@
                 <configuration>
                     <target>${java.version}</target>
                     <source>${java.version}</source>
-                    <encoding>${project.reporting.outputEncoding</encoding>
+                    <encoding>${project.reporting.outputEncoding}</encoding>
                     <useIncrementalCompilation>false</useIncrementalCompilation>
                 </configuration>
             </plugin>
