@@ -17,7 +17,7 @@ public class BungeeMain extends Plugin {
     @Override
     public void onEnable() {
         instance = this;
-        getProxy().getScheduler().schedule(instance, () -> updatePlayers(), 5, 5, TimeUnit.SECONDS);
+        getProxy().getScheduler().schedule(instance, this::updatePlayers, 5, 5, TimeUnit.SECONDS);
         getProxy().registerChannel("lc:tobukkit");
         getProxy().registerChannel("lc:tobungee");
         PluginMessageListener.start();
