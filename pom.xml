@@ -3,7 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.lazygon.lunachatbridge</groupId>
     <artifactId>LunaChatBridge</artifactId>
-    <version>1.1.6</version>
+    <version>1.1.7</version>
+
     <repositories>
         <repository>
             <id>spigot-repo</id>
@@ -51,7 +52,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
-                    <finalName>${project.name}</finalName>
+                    <finalName>${project.name}-${project.version}</finalName>
                     <archive>
                         <manifest>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
@@ -67,7 +68,7 @@
                 <configuration>
                     <target>${java.version}</target>
                     <source>${java.version}</source>
-                    <encoding>UTF-8</encoding>
+                    <encoding>${project.reporting.outputEncoding}</encoding>
                     <useIncrementalCompilation>false</useIncrementalCompilation>
                 </configuration>
             </plugin>
@@ -77,7 +78,5 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>10</java.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
 </project>

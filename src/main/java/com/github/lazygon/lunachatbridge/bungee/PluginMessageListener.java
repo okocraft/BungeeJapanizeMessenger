@@ -1,11 +1,5 @@
 package com.github.lazygon.lunachatbridge.bungee;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -13,13 +7,16 @@ import net.md_5.bungee.api.event.PluginMessageEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 public class PluginMessageListener implements Listener {
 
     private static final BungeeMain PLUGIN = BungeeMain.getInstance();
     private static final PluginMessageListener INSTANCE = new PluginMessageListener();
-
-    private PluginMessageListener() {
-    }
 
     static void start() {
         ProxyServer.getInstance().getPluginManager().registerListener(PLUGIN, INSTANCE);
@@ -27,6 +24,9 @@ public class PluginMessageListener implements Listener {
 
     static void stop() {
         ProxyServer.getInstance().getPluginManager().unregisterListener(INSTANCE);
+    }
+
+    private PluginMessageListener() {
     }
 
     @EventHandler
@@ -88,7 +88,16 @@ public class PluginMessageListener implements Listener {
                 }
 
                 byte[] data = byteOutStream.toByteArray();
+
                 String serverFrom = ProxyServer.getInstance().getPlayer(playerName).getServer().getInfo().getName();
+                LunaChatGlobalChatEvent e = new LunaChatGlobalChatEvent(channelName, playerName,
+                        playerDisplayName, playerPrefix, playerSuffix, worldName, serverFrom, chatMessage);
+                ProxyServer.getInstance().getPluginManager().callEvent(e);
+
+                if (e.isCancelled()) {
+                    return;
+                }
+
                 for (ServerInfo server : ProxyServer.getInstance().getServers().values()) {
                     if (serverFrom.equals(server.getName()) || server.getPlayers().isEmpty()) {
                         continue;
