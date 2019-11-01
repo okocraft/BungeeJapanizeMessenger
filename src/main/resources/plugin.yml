@@ -1,4 +1,47 @@
-name: ${project.name}
-main: com.github.ucchyocean.bjm.BungeeJapanizeMessenger
+name: ${project.artifactId}
 version: ${project.version}
-author: ucchy
+main: com.github.lazygon.lunachatbridge.bukkit.BukkitMain
+author: lazy_gon
+depend: ["LunaChat"]
+
+commands:
+  lunachatbridge:
+    description: Base Command of this plugin.
+    aliases: ["lcbridge", "lcb"]
+
+permissions:
+  lunachatbridge.*:
+    description: 全権限。
+    children:
+      lunachatbridge.bungeechannel.*: true
+      lunachatbridge.tell: true
+    default: op
+  lunachatbridge.bungeechannel.*:
+    description: bungeechannelコマンドの全権限
+    children:
+      lunachatbridge.bungeechannel.add: true
+      lunachatbridge.bungeechannel.remove: true
+      lunachatbridge.bungeechannel.list: true
+    default: op
+  lunachatbridge.bungeechannel.add:
+    description: /lunachatbridge bungeechannel add <channel> コマンドの権限
+    children:
+      lunachatbridge.bungeechannel.add.moderator: true
+    default: op
+  lunachatbridge.bungeechannel.remove:
+    description: /lunachatbridge bungeechannel remove <channel> コマンドの権限
+    children:
+      lunachatbridge.bungeechannel.remove.moderator: true
+    default: op
+  lunachatbridge.bungeechannel.list:
+    description: /lunachatbridge bungeechannel list コマンドの権限
+    default: op
+  lunachatbridge.bungeechannel.add.moderator:
+    description: 自分がモデレーターのチャンネルのみaddコマンドを利用可能になる権限
+    default: true
+  lunachatbridge.bungeechannel.remove.moderator:
+    description: 自分がモデレーターのチャンネルのみremoveコマンドを利用可能になる権限
+    default: true
+  lunachatbridge.tell:
+    description: サーバー間でtell、replyコマンドを貫通させるための権限。
+    default: true
