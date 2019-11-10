@@ -120,10 +120,10 @@ public class LunaChatListener implements Listener {
             message = message.substring(9);
         }
 
-        if (!StringUtil.startsWithIgnoreCase(message, "tell") && !StringUtil.startsWithIgnoreCase(message, "t")
-                && !StringUtil.startsWithIgnoreCase(message, "m") && !StringUtil.startsWithIgnoreCase(message, "msg")
-                && !StringUtil.startsWithIgnoreCase(message, "message")
-                && !StringUtil.startsWithIgnoreCase(message, "w")) {
+        if (!StringUtil.startsWithIgnoreCase(message, "tell ") && !StringUtil.startsWithIgnoreCase(message, "t")
+                && !StringUtil.startsWithIgnoreCase(message, "m ") && !StringUtil.startsWithIgnoreCase(message, "msg")
+                && !StringUtil.startsWithIgnoreCase(message, "message ")
+                && !StringUtil.startsWithIgnoreCase(message, "w ")) {
             return;
         }
 
@@ -186,7 +186,7 @@ public class LunaChatListener implements Listener {
             message = message.substring(9);
         }
 
-        if (!StringUtil.startsWithIgnoreCase(message, "reply") && !StringUtil.startsWithIgnoreCase(message, "r")) {
+        if (!StringUtil.startsWithIgnoreCase(message, "reply ") && !StringUtil.startsWithIgnoreCase(message, "r ")) {
             return;
         }
 
