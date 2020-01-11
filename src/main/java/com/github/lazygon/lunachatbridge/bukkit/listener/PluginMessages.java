@@ -138,7 +138,7 @@ public class PluginMessages implements PluginMessageListener {
         LunaChatAPI api = LunaChat.getInstance().getLunaChatAPI();
         String cname = inviter.getName() + ">" + invited.getName();
         Channel channel = api.getChannel(cname);
-        if ( channel == null ) {
+        if (channel == null) {
             // チャンネルを作成して、送信者、受信者をメンバーにする
             channel = api.createChannel(cname);
             channel.setVisible(false);
@@ -149,7 +149,7 @@ public class PluginMessages implements PluginMessageListener {
         }
 
         // メッセージがあるなら送信する
-        if ( message.trim().length() > 0 ) {
+        if (message.trim().length() > 0) {
             channel.chat(inviter, message);
         }
 
@@ -158,22 +158,21 @@ public class PluginMessages implements PluginMessageListener {
         DataMapsExtended.putIntoPMMap(inviter.getName(), invited.getName());
         return;
     }
-    
+
     /**
      * メッセージリソースのメッセージを、カラーコード置き換えしつつ、senderに送信する
      * 
      * @author ucchy
      * 
-     * @param cp メッセージの送り先
-     * @param pre プレフィックス
-     * @param key リソースキー
+     * @param cp   メッセージの送り先
+     * @param pre  プレフィックス
+     * @param key  リソースキー
      * @param args リソース内の置き換え対象キーワード
      */
-    protected void sendResourceMessage(ChannelPlayer cp, String pre,
-            String key, Object... args) {
+    protected void sendResourceMessage(ChannelPlayer cp, String pre, String key, Object... args) {
 
         String org = Resources.get(key);
-        if ( org == null || org.equals("") ) {
+        if (org == null || org.equals("")) {
             return;
         }
         String msg = String.format(pre + org, args);
