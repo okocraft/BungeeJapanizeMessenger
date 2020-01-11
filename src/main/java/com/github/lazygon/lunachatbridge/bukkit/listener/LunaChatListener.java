@@ -80,6 +80,9 @@ public class LunaChatListener implements Listener {
             // 日本語化するかどうか
             out.writeBoolean(LunaChat.getInstance().getLunaChatAPI().isPlayerJapanize(event.getPlayer().getName()));
 
+            // カラーコードを使えるかどうか
+            out.writeBoolean(event.getPlayer().hasPermission("lunachat.allowcc"));
+
             Bukkit.getServer().sendPluginMessage(PLUGIN, "lc:tobungee", byteOutStream.toByteArray());
             out.close();
             byteOutStream.close();

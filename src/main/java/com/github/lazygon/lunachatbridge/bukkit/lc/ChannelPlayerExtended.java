@@ -8,13 +8,15 @@ public class ChannelPlayerExtended extends ChannelPlayerName {
     private final String suffix;
     private final String worldName;
     private final String displayName;
+    private boolean canUseColorCode;
 
-    public ChannelPlayerExtended(String name, String prefix, String suffix, String worldName, String displayName) {
+    public ChannelPlayerExtended(String name, String prefix, String suffix, String worldName, String displayName, boolean canUseColorCode) {
         super(name);
         this.prefix = prefix;
         this.suffix = suffix;
         this.worldName = worldName;
         this.displayName = displayName;
+        this.canUseColorCode = canUseColorCode;
     }
 
     @Override
@@ -43,5 +45,14 @@ public class ChannelPlayerExtended extends ChannelPlayerName {
         } else {
             return worldName;
         }
+    }
+
+    @Override
+    public boolean hasPermission(String node) {
+        if (node.equals("lunachat.allowcc")) {
+            return canUseColorCode;
+        }
+
+        return super.hasPermission(node);
     }
 }

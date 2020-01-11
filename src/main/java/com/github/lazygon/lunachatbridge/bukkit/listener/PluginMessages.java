@@ -52,6 +52,7 @@ public class PluginMessages implements PluginMessageListener {
                 String worldName = in.readUTF();
                 String chatMessage = in.readUTF();
                 boolean japanize = in.readBoolean();
+                boolean canUseColorCode = in.readBoolean();
 
                 in.close();
                 byteArrayIn.close();
@@ -71,7 +72,7 @@ public class PluginMessages implements PluginMessageListener {
                         return;
                     }
                     ChannelPlayer channelPlayer = new ChannelPlayerExtended(playerName, playerPrefix, playerSuffix,
-                            worldName, playerDisplayName);
+                            worldName, playerDisplayName, canUseColorCode);
                     sendTellMessage(channelPlayer, invited, chatMessage);
                     return;
                 }
@@ -81,7 +82,7 @@ public class PluginMessages implements PluginMessageListener {
                 }
 
                 ChannelPlayer channelPlayer = new ChannelPlayerExtended(playerName, playerPrefix, playerSuffix,
-                        worldName, playerDisplayName);
+                        worldName, playerDisplayName, canUseColorCode);
                 Channel lcChannel = LunaChat.getInstance().getLunaChatAPI().getChannel(channelName);
                 if (lcChannel != null) {
                     lcChannel.chat(channelPlayer, chatMessage);

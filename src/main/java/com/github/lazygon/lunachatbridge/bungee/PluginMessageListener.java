@@ -77,6 +77,9 @@ public class PluginMessageListener implements Listener {
                 boolean japanize = in.readBoolean();
                 out.writeBoolean(japanize);
 
+                boolean canUseColorCode = in.readBoolean();
+                out.writeBoolean(canUseColorCode);
+
                 in.close();
                 byteInStream.close();
                 out.close();
