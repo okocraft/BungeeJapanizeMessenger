@@ -90,13 +90,6 @@ public class PluginMessageListener implements Listener {
                 byte[] data = byteOutStream.toByteArray();
 
                 String serverFrom = ProxyServer.getInstance().getPlayer(playerName).getServer().getInfo().getName();
-                LunaChatGlobalChatEvent e = new LunaChatGlobalChatEvent(channelName, playerName,
-                        playerDisplayName, playerPrefix, playerSuffix, worldName, serverFrom, chatMessage);
-                ProxyServer.getInstance().getPluginManager().callEvent(e);
-
-                if (e.isCancelled()) {
-                    return;
-                }
 
                 for (ServerInfo server : ProxyServer.getInstance().getServers().values()) {
                     if (serverFrom.equals(server.getName()) || server.getPlayers().isEmpty()) {
