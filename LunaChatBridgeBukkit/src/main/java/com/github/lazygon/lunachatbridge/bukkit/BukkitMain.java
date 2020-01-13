@@ -14,6 +14,11 @@ public class BukkitMain extends JavaPlugin {
     private static BukkitMain instance;
 
     @Override
+    public void onLoad() {
+        instance = this;
+    }
+
+    @Override
     public void onEnable() {
         getServer().getMessenger().registerIncomingPluginChannel(this, "lc:tobukkit", PluginMessages.getInstance());
         getServer().getMessenger().registerOutgoingPluginChannel(this, "lc:tobungee");
@@ -32,6 +37,9 @@ public class BukkitMain extends JavaPlugin {
     public static BukkitMain getInstance() {
         if (instance == null) {
             instance = (BukkitMain) Bukkit.getPluginManager().getPlugin("LunaChatBridge");
+            if (instance == null) {
+                throw new ExceptionInInitializerError("Cannot initialize LunaChatBukkit plugin.");
+            }
         }
 
         return instance;

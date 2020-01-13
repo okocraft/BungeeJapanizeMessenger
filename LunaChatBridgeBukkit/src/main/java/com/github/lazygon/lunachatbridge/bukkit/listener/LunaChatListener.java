@@ -20,8 +20,6 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.server.TabCompleteEvent;
 import org.bukkit.util.StringUtil;
 
-import net.md_5.bungee.api.event.PluginMessageEvent;
-
 public class LunaChatListener implements Listener {
 
     private static final BukkitMain PLUGIN = BukkitMain.getInstance();
