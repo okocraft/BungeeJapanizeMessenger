@@ -11,6 +11,8 @@ import javax.security.auth.login.LoginException;
 
 /**
  * Discord Bot にログインし、 JDA (Java Discord API) を取得するクラス。
+ * 
+ * @author Siroshun09
  */
 public class DiscordUtils {
 
