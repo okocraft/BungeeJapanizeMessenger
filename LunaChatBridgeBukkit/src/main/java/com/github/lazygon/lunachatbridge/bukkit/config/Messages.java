@@ -20,7 +20,7 @@ public final class Messages extends CustomConfig {
     /**
      * Send message to player.
      * 
-     * @param player
+     * @param sender
      * @param addPrefix
      * @param path
      * @param placeholders
@@ -38,7 +38,7 @@ public final class Messages extends CustomConfig {
     /**
      * Send message to player.
      * 
-     * @param player
+     * @param sender
      * @param path
      * @param placeholders
      */

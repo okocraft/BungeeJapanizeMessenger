@@ -101,7 +101,7 @@ public class LunaChatListener implements Listener {
      * </p>
      * バンジーコード
      * </p>
-     * {@link PluginMessageListener#onPluginMessageReceived(PluginMessageEvent)} ->
+     * PluginMessageListener#onPluginMessageReceived(PluginMessageEvent) ->
      * </p>
      * ここから他鯖
      * </p>
@@ -167,7 +167,7 @@ public class LunaChatListener implements Listener {
      * </p>
      * バンジーコード
      * </p>
-     * {@link PluginMessageListener#onPluginMessageReceived(PluginMessageEvent)} ->
+     * PluginMessageListener#onPluginMessageReceived(PluginMessageEvent)
      * </p>
      * ここから他鯖
      * </p>

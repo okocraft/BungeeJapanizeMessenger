@@ -45,7 +45,7 @@ public abstract class CustomConfig {
     /**
      * Gets FileConfiguration of {@code file}.
      *
-     * @return FileConfiguration
+     * @return Configuration
      * @author LazyGon
      */
     protected Configuration get() {
@@ -57,7 +57,7 @@ public abstract class CustomConfig {
     }
 
     /**
-     * Loads FileConfiguration from {@code file}.
+     * Loads Configuration from {@code file}.
      *
      * @author LazyGon
      */
