@@ -62,27 +62,24 @@ public class PluginMessages implements PluginMessageListener {
                     LunaChat.getInstance().getLunaChatAPI().setPlayersJapanize(playerName, japanize);
                 }
 
+                ChannelPlayer channelPlayer = new ChannelPlayerExtended(playerName, playerPrefix, playerSuffix,
+                        worldName, playerDisplayName, canUseColorCode);
+
                 // プライベートメッセージ
                 if (channelName.contains(">")) {
                     if (Bukkit.getPlayer(playerName) != null) {
                         return;
                     }
-                    String invited = channelName.substring(channelName.indexOf(">") + 1, channelName.length());
+                    String invited = channelName.substring(channelName.indexOf(">") + 1);
+
                     if (Bukkit.getPlayer(invited) == null) {
                         return;
                     }
-                    ChannelPlayer channelPlayer = new ChannelPlayerExtended(playerName, playerPrefix, playerSuffix,
-                            worldName, playerDisplayName, canUseColorCode);
+
                     sendTellMessage(channelPlayer, invited, chatMessage);
                     return;
                 }
 
-                if (!BungeeChannels.getInstance().isBungeeChannel(channelName)) {
-                    return;
-                }
-
-                ChannelPlayer channelPlayer = new ChannelPlayerExtended(playerName, playerPrefix, playerSuffix,
-                        worldName, playerDisplayName, canUseColorCode);
                 Channel lcChannel = LunaChat.getInstance().getLunaChatAPI().getChannel(channelName);
                 if (lcChannel != null) {
                     lcChannel.chat(channelPlayer, chatMessage);
@@ -107,7 +104,6 @@ public class PluginMessages implements PluginMessageListener {
             byteArrayIn.close();
         } catch (IOException e) {
             e.printStackTrace();
-            return;
         }
     }
 
