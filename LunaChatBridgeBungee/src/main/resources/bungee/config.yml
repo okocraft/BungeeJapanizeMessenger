@@ -1,0 +1,14 @@
+# discord:
+#   LunaChat_channel_name:
+#     bot-token: bot_token
+#     discord-channel: discord_channel_name
+
+discord:
+  bot:
+    token: token
+    status: "ONLINE"
+    activity: "DEFAULT"
+    game: "おこ鯖。| %players%人がログイン中"
+    url: ""
+  channel-map:
+    lunachat_channel_name: discord_channel_id # like 1892739873249
