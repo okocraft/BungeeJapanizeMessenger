@@ -1,4 +1,4 @@
-name: ${project.artifactId}
+name: LunaChatBridge
 version: ${project.version}
 main: com.github.lazygon.lunachatbridge.bungee.BungeeMain
 author: lazy_gon
