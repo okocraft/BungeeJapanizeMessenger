@@ -1,14 +1,30 @@
-# discord:
-#   LunaChat_channel_name:
-#     bot-token: bot_token
-#     discord-channel: discord_channel_name
+opened-channels:
+  # Chat message will shared on listed server.
+  # All listed servers' lunachat must have channel with specified name.
+  LunaChat_channel_name_1:
+  - server_1
+  - server_2
+  - server_3
+  LunaChat_channel_name_2: # server_3 will not see/speak chat message from/to other server in this channel.
+  - server_1
+  - server_2
 
 discord:
   bot:
     token: token
     status: "ONLINE"
     activity: "DEFAULT"
-    game: "おこ鯖。| %players%人がログイン中"
+    game: "LunaChat"
     url: ""
   channel-map:
-    lunachat_channel_name: discord_channel_id # like 1892739873249
+    discord_channel_id_1: # like 17892739873249
+      lunachat_channel_name_1:
+      - server_1
+      - server_2
+      - server_3
+      lunachat_channel_name_2: # Two channels message are send in one discord channel.
+      - server_1
+      - server_2
+    discord_channel_id_2:
+      lunachat_channel_name_3:
+      - server_1 # Only server_1 channel message will send to discord. 

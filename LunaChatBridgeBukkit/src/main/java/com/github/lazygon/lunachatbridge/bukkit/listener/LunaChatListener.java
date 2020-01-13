@@ -42,8 +42,7 @@ public class LunaChatListener implements Listener {
             return;
         }
 
-        if (!BungeeChannels.getInstance().isBungeeChannel(event.getChannelName())
-                && !event.getChannel().isPersonalChat()) {
+        if (!event.getChannel().isPersonalChat()) {
             return;
         }
 

@@ -1,7 +1,8 @@
 package com.github.lazygon.lunachatbridge.bungee.config;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 import com.github.lazygon.lunachatbridge.bungee.discord.DiscordUtils;
 
@@ -11,18 +12,22 @@ import net.md_5.bungee.config.Configuration;
 
 public class Config extends CustomConfig {
 
-    private static Config instance;
+    private static Config instance = new Config();
 
     private Config() {
         super("config.yml");
     }
 
     public static Config getInstance() {
-        if (instance == null) {
-            instance = new Config();
-        }
-
         return instance;
+    }
+
+    public Set<String> getOpenedLunaChatChannels() {
+        return getKeys("opened-channels");
+    }
+
+    public List<String> getOpeningServer(String lunaChatChannel) {
+        return get().getStringList("opened-channels." + lunaChatChannel);
     }
 
     public String getBotToken() {
@@ -45,20 +50,42 @@ public class Config extends CustomConfig {
         return get().getString("discord.bot.url");
     }
 
-    public Map<String, String> getChannelMap() {
-        Map<String, String> channelMap = new HashMap<>();
-        Configuration channelMapSection = get().getSection("discord.channel-map");
-        if (channelMapSection == null) {
-            return channelMap;
-        }
-        channelMapSection.getKeys().forEach(key -> {
-            String discordChannel = channelMapSection.getString(key);
-            if (discordChannel != null && discordChannel.matches("\\d{18}")) {
-                channelMap.put(key, discordChannel);
-            }
-        });
+    public Set<String> getMappedDiscordChannel() {
+        return getKeys("discord.channel-map");
+    }
 
-        return channelMap;
+    public void removeMappedDiscordChannel(String removalDiscordChannel) {
+        get().set("discord.channel-map." + removalDiscordChannel, null);
+        save();
+    }
+
+    public Set<String> getMappedLunaChatChannel(String discordChannelId) {
+        return getKeys("discord.channel-map." + discordChannelId);
+    }
+
+    public void removeMappedLunaChatChannel(String discordChannelId, String removalLunaChatChannel) {
+        get().set("discord.channel-map." + discordChannelId + "." + removalLunaChatChannel, null);
+        save();
+    }
+
+    public List<String> getMappedLunaChatChannelServers(String discordChannelId, String lunaChatChannel) {
+        return get().getStringList("discord.channel-map." + discordChannelId + "." + lunaChatChannel);
+    }
+
+    public void removeMappedLunaChatChannelServer(String discordChannelId, String lunaChatChannel, String removalServer) {
+        List<String> currentServers = getMappedLunaChatChannelServers(discordChannelId, lunaChatChannel);
+        currentServers.remove(removalServer);
+        get().set("discord.channel-map." + discordChannelId + "." + lunaChatChannel, currentServers);
+        save();
+    }
+
+    private Set<String> getKeys(String key) {
+        Configuration section = get().getSection(key);
+        if (section == null) {
+            return Set.of();
+        }
+
+        return (LinkedHashSet<String>) section.getKeys();
     }
 
 }

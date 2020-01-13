@@ -1,5 +1,6 @@
 package com.github.lazygon.lunachatbridge.bungee;
 
+import com.github.lazygon.lunachatbridge.bungee.config.Config;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -12,6 +13,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class PluginMessageListener implements Listener {
 
@@ -94,16 +98,45 @@ public class PluginMessageListener implements Listener {
 
                 String serverFrom = ProxyServer.getInstance().getPlayer(playerName).getServer().getInfo().getName();
 
-                for (ServerInfo server : ProxyServer.getInstance().getServers().values()) {
-                    if (serverFrom.equals(server.getName()) || server.getPlayers().isEmpty()) {
-                        continue;
-                    }
 
-                    server.sendData("lc:tobukkit", data);
+
+                for (ServerInfo server : getDestServers(serverFrom, channelName)) {
+                    server.sendData("lc:tobukkit", data, false);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Gets servers that must listen chat message from this server and LunaChat channel.
+     *
+     * @param server
+     * @param lunaChatChannel
+     *
+     * @return destination servers.
+     */
+    private Set<ServerInfo> getDestServers(String server, String lunaChatChannel) {
+        Set<ServerInfo> result = new HashSet<>();
+
+        if (!Config.getInstance().getOpenedLunaChatChannels().contains(lunaChatChannel)) {
+            return result;
+        }
+
+        List<String> servers = Config.getInstance().getOpeningServer(lunaChatChannel);
+        if (!servers.contains(server)) {
+            return result;
+        }
+
+        ProxyServer.getInstance().getServers().forEach((name, serverInfo) -> {
+            if (servers.contains(name)) {
+                result.add(serverInfo);
+            }
+        });
+
+        result.remove(server);
+
+        return result;
     }
 }

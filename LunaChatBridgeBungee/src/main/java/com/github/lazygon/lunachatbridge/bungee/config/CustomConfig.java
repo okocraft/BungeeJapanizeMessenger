@@ -61,7 +61,7 @@ public abstract class CustomConfig {
      *
      * @author LazyGon
      */
-    protected void reload() {
+    public void reload() {
         saveDefault();
         try {
             InputStream inputStream = plugin.getResourceAsStream("bungeecord/" + name);
@@ -82,7 +82,7 @@ public abstract class CustomConfig {
      *
      * @author LazyGon
      */
-    protected void saveDefault() {
+    public void saveDefault() {
         try {
             InputStream inputStream = plugin.getResourceAsStream("bungeecord/" + name);
             if (inputStream != null && !file.exists()) {
@@ -98,7 +98,7 @@ public abstract class CustomConfig {
      *
      * @author LazyGon
      */
-    protected void save() {
+    public void save() {
         if (config == null)
             return;
         try {
