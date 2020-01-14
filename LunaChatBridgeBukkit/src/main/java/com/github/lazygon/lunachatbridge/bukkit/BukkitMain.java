@@ -1,6 +1,5 @@
 package com.github.lazygon.lunachatbridge.bukkit;
 
-import com.github.lazygon.lunachatbridge.bukkit.command.LunaChatBridgeCommand;
 import com.github.lazygon.lunachatbridge.bukkit.listener.LunaChatListener;
 import com.github.lazygon.lunachatbridge.bukkit.listener.PluginMessages;
 
@@ -23,7 +22,6 @@ public class BukkitMain extends JavaPlugin {
         getServer().getMessenger().registerIncomingPluginChannel(this, "lc:tobukkit", PluginMessages.getInstance());
         getServer().getMessenger().registerOutgoingPluginChannel(this, "lc:tobungee");
         LunaChatListener.start();
-        LunaChatBridgeCommand.register();
     }
 
     @Override
