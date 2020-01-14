@@ -88,4 +88,9 @@ public class Config extends CustomConfig {
         return (LinkedHashSet<String>) section.getKeys();
     }
 
+    public void reloadAllConfig() {
+        reload();
+        Messages.getInstance().reload();
+    }
+
 }

@@ -2,6 +2,7 @@ package com.github.lazygon.lunachatbridge.bungee.config;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.chat.TextComponent;
 
 import java.util.Map;
 
@@ -31,7 +32,8 @@ public final class Messages extends CustomConfig {
         for (Map.Entry<String, Object> placeholder : placeholders.entrySet()) {
             message = message.replace(placeholder.getKey(), placeholder.getValue().toString());
         }
-        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+
+        sender.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', message)));
     }
 
     /**

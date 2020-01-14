@@ -1,8 +1,10 @@
 package com.github.lazygon.lunachatbridge.bungee.config;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.logging.Level;
 
 import com.github.lazygon.lunachatbridge.bungee.BungeeMain;
@@ -64,7 +66,7 @@ public abstract class CustomConfig {
     public void reload() {
         saveDefault();
         try {
-            InputStream inputStream = plugin.getResourceAsStream("bungeecord/" + name);
+            InputStream inputStream = plugin.getResourceAsStream("bungee/" + name);
             if (inputStream != null) {
                 config = provider.load(file, provider.load(inputStream));
             } else {
@@ -83,14 +85,50 @@ public abstract class CustomConfig {
      * @author LazyGon
      */
     public void saveDefault() {
-        try {
-            InputStream inputStream = plugin.getResourceAsStream("bungeecord/" + name);
-            if (inputStream != null && !file.exists()) {
-                provider.save(provider.load(inputStream), file);
-            }
-        } catch (IOException e) {
-            plugin.getLogger().log(Level.SEVERE, "There is no resource named " + name + " in jar file", e);
+        if (!file.exists()) {
+            saveResource(name, false);
         }
+    }
+
+    private void saveResource(String resourcePath, boolean replace) {
+        if (resourcePath == null || resourcePath.equals("")) {
+            throw new IllegalArgumentException("ResourcePath cannot be null or empty");
+        }
+
+        resourcePath = resourcePath.replace('\\', '/');
+        InputStream in = plugin.getResourceAsStream("bungee/" + resourcePath);
+        if (in == null) {
+            throw new IllegalArgumentException("The embedded resource '" + resourcePath + "' cannot be found in " + this.file);
+        }
+
+        File outFile = new File(plugin.getDataFolder(), resourcePath);
+        int lastIndex = resourcePath.lastIndexOf(47);
+        File outDir = new File(plugin.getDataFolder(), resourcePath.substring(0, lastIndex >= 0 ? lastIndex : 0));
+        if (!outDir.exists()) {
+            outDir.mkdirs();
+        }
+
+        if (outFile.exists() && !replace) {
+            plugin.getLogger().log(Level.WARNING, "Could not save " + outFile.getName() + " to " + outFile + " because " + outFile.getName() + " already exists.");
+            return;
+        }
+
+        try {
+            OutputStream out = new FileOutputStream(outFile);
+            byte[] buf = new byte[1024];
+
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+
+            out.close();
+            in.close();
+            plugin.getLogger().info("file copied!");
+        } catch (IOException e) {
+            plugin.getLogger().log(Level.SEVERE, "Could not save " + outFile.getName() + " to " + outFile, e);
+        }
+
     }
 
     /**
