@@ -5,7 +5,6 @@ import java.io.DataOutputStream;
 import java.util.List;
 
 import com.github.lazygon.lunachatbridge.bukkit.BukkitMain;
-import com.github.lazygon.lunachatbridge.bukkit.config.BungeeChannels;
 import com.github.lazygon.lunachatbridge.bukkit.lc.DataMapsExtended;
 import com.github.ucchyocean.lc.LunaChat;
 import com.github.ucchyocean.lc.channel.ChannelPlayer;
@@ -39,10 +38,6 @@ public class LunaChatListener implements Listener {
     @EventHandler
     private void onChat(LunaChatChannelChatEvent event) {
         if (!event.getPlayer().isOnline()) {
-            return;
-        }
-
-        if (!event.getChannel().isPersonalChat()) {
             return;
         }
 

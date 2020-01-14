@@ -95,10 +95,7 @@ public class PluginMessageListener implements Listener {
                 }
 
                 byte[] data = byteOutStream.toByteArray();
-
                 String serverFrom = ProxyServer.getInstance().getPlayer(playerName).getServer().getInfo().getName();
-
-
 
                 for (ServerInfo server : getDestServers(serverFrom, channelName)) {
                     server.sendData("lc:tobukkit", data, false);
@@ -112,8 +109,8 @@ public class PluginMessageListener implements Listener {
     /**
      * Gets servers that must listen chat message from this server and LunaChat channel.
      *
-     * @param server
-     * @param lunaChatChannel
+     * @param server The server speaker currently on.
+     * @param lunaChatChannel The lunachat channel which the speaker is in.
      *
      * @return destination servers.
      */
@@ -130,12 +127,10 @@ public class PluginMessageListener implements Listener {
         }
 
         ProxyServer.getInstance().getServers().forEach((name, serverInfo) -> {
-            if (servers.contains(name)) {
+            if (servers.contains(name) && !server.equals(name)) {
                 result.add(serverInfo);
             }
         });
-
-        result.remove(server);
 
         return result;
     }

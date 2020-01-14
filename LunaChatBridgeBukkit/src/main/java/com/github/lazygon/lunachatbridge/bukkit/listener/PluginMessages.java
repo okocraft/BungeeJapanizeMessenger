@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.github.lazygon.lunachatbridge.bukkit.config.BungeeChannels;
 import com.github.lazygon.lunachatbridge.bukkit.lc.ChannelPlayerExtended;
 import com.github.lazygon.lunachatbridge.bukkit.lc.DataMapsExtended;
 import com.github.ucchyocean.lc.LunaChat;
