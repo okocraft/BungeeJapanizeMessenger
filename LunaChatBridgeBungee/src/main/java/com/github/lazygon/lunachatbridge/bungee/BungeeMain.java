@@ -36,7 +36,11 @@ public class BungeeMain extends Plugin {
     public static BungeeMain getInstance() {
         if (instance == null) {
             instance = (BungeeMain) ProxyServer.getInstance().getPluginManager().getPlugin("Channels");
+            if (instance == null) {
+                throw new ExceptionInInitializerError("Cannot initialize LunaChatBridge plugin.");
+            }
         }
+    
         return instance;
     }
 
